@@ -4,13 +4,14 @@ import face from '../assets/face.png'
 import networkIcon from '../assets/icons/network.svg'
 import publicationIcon from '../assets/icons/publications.svg'
 import plusIcon from '../assets/icons/plus.svg'
-import React from 'react'
+import {Colors} from '../helpers/Colors'
+import {MenuItemProps} from '../interfaces/MenuItemInterface'
 
 
 const Wrapper = styled.section`
-    background-color: white;
+    background-color: ${Colors.White};
     border-radius: 6px;
-    box-shadow: 0px 3px 6px silver;
+    box-shadow: 0px 3px 6px ${Colors.Silver};
 `;
 
 const Container = styled.div`
@@ -27,7 +28,7 @@ const Photo = styled.img`
 
 const Title = styled.h3`
     font-size: 1.4em;
-    color: #5f6fb5;
+    color: ${Colors.Title};
     text-align: center;
     padding: .6em;
     font-weight: bold;
@@ -35,12 +36,12 @@ const Title = styled.h3`
 
 const Subtitle = styled.p`
     text-align: center;
-    color: gray;
+    color: ${Colors.Gray};
     font-size: 1em;
 `;
 
 const Menu = styled.ul`
-    border-top: #e8e8e8 solid 1px;
+    border-top: ${Colors.PrimaryBackground} solid 1px;
     padding: 1em 2em;
 `;
 
@@ -62,7 +63,7 @@ const MenuText = styled.p`
     flex-grow: 1;
     font-size: 1.2em;
     padding-left: .5em;
-    color: #3f465e;
+    color: ${Colors.PrimaryText};
 `;
 
 const MenuAction = styled.a`
@@ -70,28 +71,22 @@ const MenuAction = styled.a`
     margin: 0;
     padding: 4px 8px;
     background-color: #fff;
-    border: #3f465e solid 1px;
+    border: ${Colors.PrimaryText} solid 1px;
     border-radius: 3px;
-    box-shadow: 0px 2px 3px silver;
+    box-shadow: 0px 2px 3px ${Colors.Silver};
 
     display: flex;
     justify-content: center;
     align-content: center;
 `;
 
-interface ItemProps {
-    text : string,
-    icon : string,
-    buttonIcon : string
-}
-
-const Item = (props : ItemProps) : JSX.Element => {
+const Item = (props : MenuItemProps) : JSX.Element => {
     return (
         <MenuItem>
             <MenuIcon src={props.icon} />
             <MenuText>{props.text}</MenuText>
             <MenuAction>
-                <img src={props.buttonIcon} />
+                <img src={props.buttonIcon} alt="Button icon" />
             </MenuAction>
         </MenuItem>
     );
@@ -101,7 +96,7 @@ export const Profile = () : JSX.Element => {
     return (
         <Wrapper>
             <Container>
-            <Photo src={face} />
+            <Photo src={face} alt="user face" />
             <Title>Łukasz Cieśla</Title>
             <Subtitle>Job title - Company</Subtitle>
             </Container>

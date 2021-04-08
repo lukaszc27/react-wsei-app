@@ -7,12 +7,13 @@ import commentsIcon from '../assets/icons/comments.svg'
 
 import {Navigation} from './Navigation'
 import {SearchBar} from './SearchBar'
+import {Colors} from '../helpers/Colors'
 
 
 const Wrapper = styled.div`
-    background-color: #fff;
+    background-color: ${Colors.White};
     width: 100%;
-    box-shadow: 0px 3px 24px silver;
+    box-shadow: 0px 3px 24px ${Colors.Silver};
 	z-index: 999;
     position: relative;
 `;
@@ -38,7 +39,7 @@ const Menu = styled.div`
 `;
 
 const MenuItem = styled.div`
-    background-color: #e8e8e8;
+    background-color: ${Colors.PrimaryBackground};
     min-width: 26px;
     min-height: 26px;
     margin: .2em;
@@ -51,8 +52,8 @@ const MenuItem = styled.div`
 `;
 
 const Badge = styled.p`
-    background-color: #0381be;
-    color: white;
+    background-color: ${Colors.BadgeBackground};
+    color: ${Colors.White};
     text-align: center;
     font-size: 10px;
     border-radius: 12px;
@@ -73,16 +74,16 @@ export const TopBar = () : JSX.Element => {
 
                 <Menu>
                     <MenuItem>
-                        <img src={homeIcon} />
+                        <img src={homeIcon} alt="Home" />
                     </MenuItem>
 
                     <MenuItem>
-                        <img src={commentsIcon} />
+                        <img src={commentsIcon} alt="Comments" />
                         <Badge>3</Badge>
                     </MenuItem>
 
                     <MenuItem>
-                        <img src={bellIcon} />
+                        <img src={bellIcon} alt="Bell" />
                         <Badge>3</Badge>
                     </MenuItem>
                 </Menu>

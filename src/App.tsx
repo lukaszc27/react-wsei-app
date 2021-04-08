@@ -1,7 +1,9 @@
 import styled from 'styled-components';
+
 import {TopBar} from './components/TopBar'
 import {Footer} from './components/Footer'
 import {LeftSlide} from './components/LeftSlide'
+import {Colors} from './helpers/Colors'
 
 
 const Main = styled.div`
@@ -9,7 +11,7 @@ const Main = styled.div`
 	flex-direction: column;
 	min-height: 100vh;
 
-	background-color: #f5f7f9;
+	background-color: ${Colors.Background};
 `;
 
 const CentralWrapper = styled.div`
@@ -24,6 +26,7 @@ const Container = styled.div`
 	padding: 1.5em 2em;
 	display: flex;
 `;
+
 
 function App() {
   return (

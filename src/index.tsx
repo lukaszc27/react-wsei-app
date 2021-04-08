@@ -4,11 +4,31 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Reset} from 'styled-reset';
+import {createGlobalStyle} from 'styled-components'
 
+
+/**
+ * styl globalny
+ */
+const GlobalStyle = createGlobalStyle`
+  body {
+    font-family: -apple-system, 
+                  BlinkMacSystemFont, 
+                  'Segoe UI', 
+                  Roboto, 
+                  Oxygen, 
+                  Ubuntu, 
+                  Cantarell, 
+                  'Open Sans', 
+                  'Helvetica Neue', 
+                  sans-serif;
+  }
+`;
 
 ReactDOM.render(
   <React.StrictMode>
     <Reset/>
+    <GlobalStyle />
     <App />
   </React.StrictMode>,
   document.getElementById('root')
