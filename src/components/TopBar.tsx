@@ -5,6 +5,10 @@ import bellIcon from '../assets/icons/bell.svg'
 import homeIcon from '../assets/icons/house.svg'
 import commentsIcon from '../assets/icons/comments.svg'
 
+import privacyIcom from '../assets/icons/privacy.svg'
+import peopleIcon from '../assets/icons/people.svg'
+import configIcon from '../assets/icons/cog.svg'
+
 import {Navigation} from './Navigation'
 import {SearchBar} from './SearchBar'
 import {Colors} from '../helpers/Colors'
@@ -64,12 +68,61 @@ const Badge = styled.p`
     right: -6px;
 `;
 
+const NavSection = styled.ul`
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+`;
+const NavItem = styled.li`
+    display: flex;
+    padding: .5em;
+    align-content: center;
+
+    transition: all .3s;
+
+    &:hover {
+        background-color: #e6e6e6;
+    }
+`;
+
+const NavItemIcon = styled.img`
+    align-self: flex-start;
+    justify-self: center;
+`;
+
+const NavItemText = styled.span`
+    align-self: flex-start;
+    flex-grow: 2;
+    justify-self: center;
+    padding: 3px 6px;
+`;
+
+interface NavigationItemProps {
+    icon?: string
+}
+const NavigationItem : React.FC<NavigationItemProps> = (props) => {
+    return (
+        <NavItem>
+            {props.icon && <NavItemIcon src={props.icon} />}
+            <NavItemText>{props.children}</NavItemText>
+        </NavItem>
+    );
+}
+
 export const TopBar = () : JSX.Element => {
 	return (
 		<Wrapper>
             <Container>
                 <BrandLogo src={logo}  alt="MyCompanyName" title="MyCompanyName" />
-                <Navigation />
+                
+                <Navigation>
+                    <NavSection>
+                        <NavigationItem icon={privacyIcom}>Privacy</NavigationItem>
+                        <NavigationItem icon={peopleIcon}>People</NavigationItem>
+                        <NavigationItem icon={configIcon}>Configuration</NavigationItem>
+                    </NavSection>
+                </Navigation>
+                
                 <SearchBar />
 
                 <Menu>

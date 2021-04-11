@@ -35,7 +35,7 @@ const MenuText = styled.p`
     color: ${Colors.PrimaryText};
 `;
 
-const Item = (props : MenuItemProps) : JSX.Element => {
+const Item : React.FC<MenuItemProps> = (props) => {
     return (
         <MenuItem>
             <MenuIcon src={props.icon} />
