@@ -28,7 +28,7 @@ const Photo = styled.img`
 
 const Title = styled.h3`
     font-size: 1.4em;
-    color: ${Colors.Title};
+    color: ${Colors.SecondaryText};
     text-align: center;
     padding: .6em;
     font-weight: bold;

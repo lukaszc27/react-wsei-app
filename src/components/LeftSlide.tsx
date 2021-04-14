@@ -9,7 +9,7 @@ import entitiesIcon from '../assets/icons/entities.svg'
 
 
 const Wrapper = styled.div`
-    width: 25%;
+    min-width: 24%;
 `;
 
 const Menu = styled.ul`

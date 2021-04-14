@@ -12,5 +12,5 @@ export const Colors = {
     SearchText: '#c3c5c8',
 
     // profile
-    Title: '#5f6fb5',
+    SecondaryText: '#5f6fb5',
 }

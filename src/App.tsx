@@ -4,6 +4,8 @@ import {TopBar} from './components/TopBar'
 import {Footer} from './components/Footer'
 import {LeftSlide} from './components/LeftSlide'
 import {Colors} from './helpers/Colors'
+import { Publications } from './components/Publications';
+import { Workspace } from './components/Workspace';
 
 
 const Main = styled.div`
@@ -19,7 +21,8 @@ const CentralWrapper = styled.div`
 `;
 
 const Content = styled.main`
-	flex-grow: 3;
+	flex-grow: 2;
+	margin: 0em 3em 1em 1em;
 `;
 
 const Container = styled.div`
@@ -36,7 +39,8 @@ function App() {
 			  <Container>
 				<LeftSlide />
 				<Content>
-					<h1>Content</h1>		  
+					<Publications />
+					<Workspace />
 				</Content>
 			  </Container>
 		  </CentralWrapper>
