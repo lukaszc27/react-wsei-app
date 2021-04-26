@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 import {Profile} from './Profile'
 import {Colors} from '../helpers/Colors'
 import {MenuItemProps} from '../interfaces/MenuItemInterface'
@@ -28,31 +29,52 @@ const MenuIcon = styled.img`
     color: ${Colors.PrimaryText};
 `;
 
-const MenuText = styled.p`
+const MenuText = styled(Link)`
     padding: 1em;
     padding-left: 0px;
     font-size: 1.2em;
     color: ${Colors.PrimaryText};
+    text-decoration: none;
 `;
 
 const Item : React.FC<MenuItemProps> = (props) => {
     return (
         <MenuItem>
             <MenuIcon src={props.icon} />
-            <MenuText>{props.text}</MenuText>
+            <MenuText to={props.to}>{props.text}</MenuText>
         </MenuItem>
     );
 }
 
 export const LeftSlide = () => {
+    const items : Array<MenuItemProps> = [
+        {
+            text: 'Publications',
+            icon: publicationIcon,
+            to: '/publications'
+        },
+        {
+            text: 'Ekosystem',
+            icon: ekosystemIcon,
+            to: '/ekosystem'
+        },
+        {
+            text: 'Entities',
+            icon: entitiesIcon,
+            to: '/entities'
+        }
+    ];
+
     return (
         <Wrapper>
             <Profile />
 
             <Menu>
-                <Item icon={publicationIcon} text="Publications" />
-                <Item icon={ekosystemIcon} text="Ekosystem" />
-                <Item icon={entitiesIcon} text="Entities" />
+                {
+                    items.map(item => (
+                        <Item to={item.to} icon={item.icon} text={item.text} />
+                    ))
+                }
             </Menu>
         </Wrapper>
     );

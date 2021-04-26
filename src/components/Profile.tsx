@@ -102,11 +102,11 @@ export const Profile = () : JSX.Element => {
             </Container>
 
             <Menu>
-                <Item icon={networkIcon} 
+                <Item to="/network" icon={networkIcon} 
                     text="Your network"
                     buttonIcon={networkIcon} />
 
-                <Item icon={publicationIcon} 
+                <Item to="/publications" icon={publicationIcon} 
                     text="Your publications"
                     buttonIcon={plusIcon} />
             </Menu>

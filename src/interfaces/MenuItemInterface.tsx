@@ -4,5 +4,6 @@
 export interface MenuItemProps {
     text : string,
     icon : string,
+    to: string,
     buttonIcon? : string
 }
