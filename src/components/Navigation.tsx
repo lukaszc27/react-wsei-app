@@ -1,6 +1,8 @@
 import styled from 'styled-components'
-import {Colors} from '../helpers/Colors'
+import { ChangeEvent, useState } from 'react'
+import { Colors } from '../helpers/Colors'
 import useDropdown from 'react-dropdown-hook';
+import { Link } from 'react-router-dom';
 
 import houseLogo from '../assets/icons/house2.svg'
 import dropdownArrow from '../assets/icons/arrow-down.svg'
@@ -117,12 +119,14 @@ const Nav = styled.ul`
     flex-direction: column;
 `;
 
-const NavItem = styled.li`
+//const NavItem = styled.li`
+const NavItem = styled(Link)`
     display: flex;
     justify-content: flex-start;
     align-content: center;
     color: ${Colors.Gray};
     padding: 3px 0px;
+    text-decoration: none;
 
     transition: all .3s;
     &:hover { background-color: #cfcfcf; }
@@ -134,9 +138,10 @@ const NavItemIcon = styled.img`
     padding: .3em;
     width: 25px;
 `;
-const NavItemText = styled.p`
+const NavItemText = styled.span`
     align-self: center;
     padding: 6px 3px;
+    text-decoration: none;
 `;
 
 const SeeProfile = styled.a`
@@ -145,24 +150,102 @@ const SeeProfile = styled.a`
 `;
 
 interface NavItemProps {
-    icon : string;
-    title? : string;    // optional
+    icon: string;
+    to: string,
+    title: string;    // optional
 }
-const NavElement : React.FC<NavItemProps> = (props) => {
+const NavElement: React.FC<NavItemProps> = (props) => {
     return (
-        <NavItem>
+        <NavItem to={props.to}>
             <NavItemIcon src={props.icon} alt={props.title} />
-            <NavItemText>{props.children == null ? props.title : props.children}</NavItemText>
+            <NavItemText>
+                {props.children == null ? props.title : props.children}
+            </NavItemText>
         </NavItem>
     );
 }
 
-export const Navigation : React.FC = (props) => {
+export const Navigation: React.FC = (props) => {
     const [wrapperRef, dropdownOpen, toggleDropdown] = useDropdown();
+    const [pattern, setPattern] = useState<string>('');
+
+    const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        const text = e.target.value;
+        setPattern(text);
+    }
+
+    const platforms: Array<NavItemProps> = [
+        {
+            to: '/',
+            icon: houseLogo,
+            title: 'Home'
+        },
+        {
+            to: '/publications',
+            icon: publicationsLogo,
+            title: 'Publications'
+        },
+        {
+            to: '/people',
+            icon: peopleLogo,
+            title: 'People'
+        },
+        {
+            to: '/entities',
+            icon: entitiesLogo,
+            title: 'Entities'
+        },
+        {
+            to: '/administration',
+            icon: administrationLogo,
+            title: 'Administration'
+        }
+    ];
+
+    const workspaces : Array<NavItemProps> = [
+        {
+            to: '/clientContracts',
+            icon: clientContractLogo,
+            title: 'Client contracts'
+        },
+        {
+            to: '/supplierContracts',
+            icon: clientContractLogo,
+            title: 'Supplier contract'
+        },
+        {
+            to: '/corporate',
+            icon: corporateLogo,
+            title: 'Corporate'
+        },
+        {
+            to: '/groupNorms',
+            icon: groupNormsLogo,
+            title: 'Group norms',
+        },
+        {
+            to: '/realContracts',
+            icon: clientContractLogo,
+            title: 'Real estate contracts'
+        }
+    ];
+
+    const accounts : Array<NavItemProps> = [
+        {
+            to: '/privacy',
+            icon: privacyIcon,
+            title: 'Privacy'
+        },
+        {
+            to: '/profile',
+            icon: settingsIcon,
+            title: 'Profile'
+        }
+    ]
 
     return (
-        <MainWrapper>
-            <Wrapper ref={wrapperRef}>
+        <MainWrapper ref={wrapperRef}>
+            <Wrapper>
                 <MenuLogo src={houseLogo} />
                 <Menu>
                     <MenuItem>Home</MenuItem>
@@ -172,45 +255,51 @@ export const Navigation : React.FC = (props) => {
                 </DropdownButton>
 
             </Wrapper>
-            { dropdownOpen &&
-            <Dropdown>
-                <Filter type="text" placeholder="Filter..." />
-                <Container>
-                    {/* {props.children} */}
-                    <SectionTitle>Platform</SectionTitle>
-                    <Nav>
-                        <NavElement icon={houseLogo} title="Home" />
-                        <NavElement icon={publicationsLogo} title="Publications" />
-                        <NavElement icon={peopleLogo} title="People" />
-                        <NavElement icon={entitiesLogo} title="Entities" />
-                        <NavElement icon={administrationLogo} title="Administration" />
-                    </Nav>
+            {dropdownOpen &&
+                <Dropdown>
+                    <Filter type="text" placeholder="Filter..." value={pattern} onChange={inputHandler} />
+                    <Container>
+                        <SectionTitle>Platform</SectionTitle>
+                        <Nav>
+                            {
+                                platforms.map((item) => (
+                                    item.title.toLocaleLowerCase().includes(pattern.toLocaleLowerCase()) &&
+                                    <NavElement to={item.to} title={item.title} icon={item.icon} key={item.to} />
+                                ))
+                            }
+                        </Nav>
 
-                    <SectionTitle>Workspaces</SectionTitle>
-                    <Nav>
-                        <NavElement icon={clientContractLogo} title="Client contracts" />
-                        <NavElement icon={clientContractLogo} title="Supplier contract" />
-                        <NavElement icon={corporateLogo} title="Corporate" />
-                        <NavElement icon={groupNormsLogo} title="Group norms" />
-                        <NavElement icon={clientContractLogo} title="Real estate contracts" />
-                    </Nav>
-                </Container>
-                <AccoutSection>
-                    <SectionTitle>Account</SectionTitle>
-                    <Nav>
-                        <NavElement icon={avatarLogo} title="Łukasz Cieśla">
-                            <p>Łukasz Cieśla</p>
-                            <SeeProfile>See profile</SeeProfile>
-                        </NavElement>
-                        <NavElement icon={privacyIcon} title="Privacy" />
-                        <NavElement icon={settingsIcon} title="Settings" />
-                    </Nav>
-                </AccoutSection>
-                <LogoutSection>
-                    <img src={logoutIcon} alt="Logout" />
-                    <LogoutText>Logout</LogoutText>
-                </LogoutSection>
-            </Dropdown>
+                        <SectionTitle>Workspaces</SectionTitle>
+                        <Nav>
+                            {
+                                workspaces.map(item => (
+                                    item.title.toLocaleLowerCase().includes(pattern.toLocaleLowerCase()) &&
+                                    <NavElement to={item.to} title={item.title} icon={item.icon} key={item.to} />
+                                ))
+                            }
+                        </Nav>
+                    </Container>
+                    <AccoutSection>
+                        <SectionTitle>Account</SectionTitle>
+                        <Nav>
+                            <NavElement to="/profile" icon={avatarLogo} title="Łukasz Cieśla">
+                                <p>Łukasz Cieśla</p>
+                                <SeeProfile>See profile</SeeProfile>
+                            </NavElement>
+
+                            {
+                                accounts.map(item => (
+                                    item.title.toLocaleLowerCase().includes(pattern.toLocaleLowerCase()) &&
+                                    <NavElement to={item.to} icon={item.icon} title={item.title} key={item.to} />
+                                ))
+                            }
+                        </Nav>
+                    </AccoutSection>
+                    <LogoutSection>
+                        <img src={logoutIcon} alt="Logout" />
+                        <LogoutText>Logout</LogoutText>
+                    </LogoutSection>
+                </Dropdown>
             }
         </MainWrapper>
     );

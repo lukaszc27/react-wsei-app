@@ -1,11 +1,18 @@
 import styled from 'styled-components';
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Link
+} from "react-router-dom";
 
 import {TopBar} from './components/TopBar'
 import {Footer} from './components/Footer'
 import {LeftSlide} from './components/LeftSlide'
 import {Colors} from './helpers/Colors'
-import { Publications } from './components/Publications';
-import { Workspace } from './components/Workspace';
+
+import {Home} from './components/Home/Home'
+import {Publications} from './components/Publications/Publications'
 
 
 const Main = styled.div`
@@ -33,19 +40,27 @@ const Container = styled.div`
 
 function App() {
   return (
-	  <Main>
-		  <TopBar />
-		  <CentralWrapper>
-			  <Container>
-				<LeftSlide />
-				<Content>
-					<Publications />
-					<Workspace />
-				</Content>
-			  </Container>
-		  </CentralWrapper>
-		  {/* <Footer /> */}
-	  </Main>
+	  <Router>
+		<Main>
+			<TopBar />
+			<CentralWrapper>
+				<Container>
+					<LeftSlide />
+
+					<Switch>
+						<Content>
+							<Route path="/publications" exact>
+								<Publications />
+							</Route>
+							<Route path="/" exact>
+								<Home />
+							</Route>
+						</Content>
+					</Switch>
+				</Container>
+			</CentralWrapper>
+		</Main>
+	  </Router>
   );
 }
 
