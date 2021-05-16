@@ -35,6 +35,8 @@ const MenuText = styled(Link)`
     font-size: 1.2em;
     color: ${Colors.PrimaryText};
     text-decoration: none;
+
+    &:hover { text-decoration: underline; }
 `;
 
 const Item : React.FC<MenuItemProps> = (props) => {

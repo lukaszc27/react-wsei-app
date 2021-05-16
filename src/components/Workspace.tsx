@@ -5,7 +5,7 @@ import {Card} from './WorkspaceCard'
 import CardIcon from '../assets/icons/entities2.svg'
 
 
-const Title = styled.h1`
+export const Title = styled.h1`
     color: ${Colors.PrimaryText};
     font-size: 1.4em;
     margin: 1em;

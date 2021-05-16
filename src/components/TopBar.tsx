@@ -68,47 +68,6 @@ const Badge = styled.p`
     right: -6px;
 `;
 
-// const NavSection = styled.ul`
-//     margin: 0;
-//     padding: 0;
-//     list-style-type: none;
-// `;
-// const NavItem = styled.li`
-//     display: flex;
-//     padding: .5em;
-//     align-content: center;
-
-//     transition: all .3s;
-
-//     &:hover {
-//         background-color: #e6e6e6;
-//     }
-// `;
-
-// const NavItemIcon = styled.img`
-//     align-self: flex-start;
-//     justify-self: center;
-// `;
-
-// const NavItemText = styled.span`
-//     align-self: flex-start;
-//     flex-grow: 2;
-//     justify-self: center;
-//     padding: 3px 6px;
-// `;
-
-// interface NavigationItemProps {
-//     icon?: string
-// }
-// const NavigationItem : React.FC<NavigationItemProps> = (props) => {
-//     return (
-//         <NavItem>
-//             {props.icon && <NavItemIcon src={props.icon} />}
-//             <NavItemText>{props.children}</NavItemText>
-//         </NavItem>
-//     );
-// }
-
 export const TopBar = () : JSX.Element => {
 	return (
 		<Wrapper>
@@ -116,11 +75,6 @@ export const TopBar = () : JSX.Element => {
                 <BrandLogo src={logo}  alt="MyCompanyName" title="MyCompanyName" />
                 
                 <Navigation>
-                    {/* <NavSection>
-                        <NavigationItem icon={privacyIcom}>Privacy</NavigationItem>
-                        <NavigationItem icon={peopleIcon}>People</NavigationItem>
-                        <NavigationItem icon={configIcon}>Configuration</NavigationItem>
-                    </NavSection> */}
                 </Navigation>
                 
                 <SearchBar />

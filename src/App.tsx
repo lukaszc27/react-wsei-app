@@ -13,6 +13,14 @@ import {Colors} from './helpers/Colors'
 
 import {Home} from './components/Home/Home'
 import {Publications} from './components/Publications/Publications'
+import {People} from './components/People/People'
+import {Entities} from './components/Entities/Entities'
+import { Administration } from './components/Administration/Administration';
+import {ClientContract} from './components/Contracts/ClientContract'
+import {SupplierContract} from './components/Contracts/SupplierContract'
+import { EstateContract } from './components/Contracts/EstateContract';
+import {Corporate} from './components/Corporate/Corporate'
+import {GroupNorms} from './components/Groups/GroupNorms'
 
 
 const Main = styled.div`
@@ -49,6 +57,30 @@ function App() {
 
 					<Switch>
 						<Content>
+							<Route path="/groupNorms">
+								<GroupNorms />
+							</Route>
+							<Route path="/corporate">
+								<Corporate />
+							</Route>
+							<Route path="/clientContracts">
+								<ClientContract />
+							</Route>
+							<Route path="/supplierContracts">
+								<SupplierContract />
+							</Route>
+							<Route path="/estateContracts">
+								<EstateContract />
+							</Route>
+							<Route path="/administration">
+								<Administration />
+							</Route>
+							<Route path="/people">
+								<People />
+							</Route>
+							<Route path="/entities">
+								<Entities />
+							</Route>
 							<Route path="/publications" exact>
 								<Publications />
 							</Route>

@@ -224,7 +224,7 @@ export const Navigation: React.FC = (props) => {
             title: 'Group norms',
         },
         {
-            to: '/realContracts',
+            to: '/estateContracts',
             icon: clientContractLogo,
             title: 'Real estate contracts'
         }
