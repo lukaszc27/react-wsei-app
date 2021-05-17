@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import {Publications} from '../Publications'
 import {Workspace, Title} from '../Workspace'
 import {Colors} from '../../helpers/Colors'
@@ -8,8 +8,10 @@ import FilterIcon from '../../assets/icons/search.png'
 import DropdownArrow from '../../assets/icons/arrow-down.svg'
 import Card from './Card'
 
-import useDropdown from 'react-dropdown-hook'
-import { render } from '@testing-library/react'
+// import useDropdown from 'react-dropdown-hook'
+// import { render } from '@testing-library/react'
+import axios from 'axios'
+import ReactPaginate from 'react-paginate'
 
 
 const ResumeTopBar = styled.div`
@@ -76,7 +78,55 @@ const Container = styled.section`
     flex-direction: column;
 `;
 
-export class Home extends React.Component {
+interface HomeComponentProps {
+}
+
+interface HomeComponentState {
+    comments : Array<CommentsInterface>,
+    filterPattern : string
+}
+
+interface CommentsInterface {
+    postId: number;
+    id: number;
+    name: string,
+    email: string,
+    body: string
+}
+
+export class Home extends React.Component<HomeComponentProps, HomeComponentState> {
+    constructor(props : HomeComponentProps) {
+        super(props);
+    }
+
+    state = {
+        comments: [],
+        filterPattern: ''
+    }
+
+    componentDidMount() : void {
+        axios.get('https://jsonplaceholder.typicode.com/comments')
+            .then(response => {
+                this.setState({
+                    comments: response.data
+                });
+            })
+            .catch(error => {
+                console.log(error.data);
+            })
+    }
+
+    filterButtonHandle(e : React.MouseEvent<HTMLButtonElement>) : void {
+        e.preventDefault();
+
+        const input : HTMLInputElement | null = document.querySelector('input[type="text"]');
+        if (input != null) {
+            this.setState({
+                filterPattern: input.value
+            });
+        }
+    }
+
     render() {
         return (
             <>
@@ -88,7 +138,7 @@ export class Home extends React.Component {
                     <RightContainer>
                         <FilterWrapper>
                             <FilterInput type="text" placeholder="Filter by title..." />
-                            <FilterButton>
+                            <FilterButton onClick={this.filterButtonHandle.bind(this)}>
                                 <img src={FilterIcon} alt="Filter" />
                             </FilterButton>
                         </FilterWrapper>
@@ -99,7 +149,16 @@ export class Home extends React.Component {
                     </RightContainer>
                 </ResumeTopBar>
 
-                <Container></Container>
+                <Container>
+                    {
+                        this.state.comments.map((item : CommentsInterface) => (
+
+                            item.name.toLocaleLowerCase().includes(this.state.filterPattern.toLocaleLowerCase()) &&
+                            <Card title={item.name} content={item.body} />
+                        ))
+                    }
+                    {/* <ReactPaginate pageCount={500} pageRangeDisplayed={100} marginPagesDisplayed={10} /> */}
+                </Container>
             </>
         );
     }
