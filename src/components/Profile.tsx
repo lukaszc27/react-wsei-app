@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import face from '../assets/face.png'
 
 import networkIcon from '../assets/icons/network.svg'
@@ -26,12 +27,15 @@ const Photo = styled.img`
     align-self: center;
 `;
 
-const Title = styled.h3`
+const Title = styled(Link)`
     font-size: 1.4em;
     color: ${Colors.SecondaryText};
     text-align: center;
     padding: .6em;
     font-weight: bold;
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
 `;
 
 const Subtitle = styled.p`
@@ -96,9 +100,9 @@ export const Profile = () : JSX.Element => {
     return (
         <Wrapper>
             <Container>
-            <Photo src={face} alt="user face" />
-            <Title>Łukasz Cieśla</Title>
-            <Subtitle>Job title - Company</Subtitle>
+                <Photo src={face} alt="user face" />
+                <Title to="/profile">Łukasz Cieśla</Title>
+                <Subtitle>Job title - Company</Subtitle>
             </Container>
 
             <Menu>

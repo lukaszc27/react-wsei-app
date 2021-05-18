@@ -21,6 +21,7 @@ import {SupplierContract} from './components/Contracts/SupplierContract'
 import { EstateContract } from './components/Contracts/EstateContract';
 import {Corporate} from './components/Corporate/Corporate'
 import {GroupNorms} from './components/Groups/GroupNorms'
+import Profile from './components/Profile/Profile'
 
 
 const Main = styled.div`
@@ -57,6 +58,9 @@ function App() {
 
 					<Switch>
 						<Content>
+							<Route path="/profile" exact>
+								<Profile />
+							</Route>
 							<Route path="/groupNorms">
 								<GroupNorms />
 							</Route>
