@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import logo from '../assets/logo.png'
 import bellIcon from '../assets/icons/bell.svg'
@@ -68,12 +69,14 @@ const Badge = styled.p`
     right: -6px;
 `;
 
-export const TopBar = () : JSX.Element => {
+export const TopBar : React.FC = () => {
 	return (
 		<Wrapper>
             <Container>
-                <BrandLogo src={logo}  alt="MyCompanyName" title="MyCompanyName" />
-                
+                <Link to="/">
+                    <BrandLogo src={logo}  alt="MyCompanyName" title="MyCompanyName" />
+                </Link>
+
                 <Navigation>
                 </Navigation>
                 

@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import HeaderButton from './HeaderButton'
 import ProfileView from './ProfileView'
+import {Colors} from '../../helpers/Colors'
 
 
 // import icons
@@ -13,12 +14,16 @@ import editIcon from '../../assets/icons/plus.svg'
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
+    background-color: ${Colors.White};
+    padding: 1em;
+    box-shadow: 0px 3px 3px ${Colors.Silver};
+    border-radius: 6px;
 `;
 
 const Header = styled.section`
     align-self: flex-start;
     border-bottom: #ccc solid 1px;
-    width: 100%;
+    width: 97%;
     padding: 0 1em 2em 1em;
     position: relative;
 `;
@@ -77,7 +82,7 @@ const ExpandRow = styled.div`
 
 const EditButton = styled.button`
     position: absolute;
-    top: 0;
+    top: .4em;
     right: 0;
     padding: .5em;
     border: 0;
@@ -87,6 +92,8 @@ const EditButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: ${Colors.White};
+    transition: all .2s;
 
     &:hover { background-color: #ccc; }
 `;
@@ -95,7 +102,7 @@ const Section = styled.section`
     border-bottom: #ccc solid 1px;
     padding: 2em 1em;
     position: relative;
-    width: 100%;
+    width: 97%;
 `;
 
 const SectionTitle = styled.h3`
