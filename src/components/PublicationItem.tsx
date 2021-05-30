@@ -27,6 +27,12 @@ const InformationContainer = styled.div`
     font-size: .8em;
 `;
 
+interface PublicationItemProps {
+    image? : string;
+    title : string;
+    body : string;
+}
+
 export const PublicationItem : React.FC = () => {
     return (
         <Wrapper>

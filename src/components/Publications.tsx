@@ -1,9 +1,10 @@
 import styled from 'styled-components'
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {Colors} from '../helpers/Colors'
 import {PublicationItem} from './PublicationItem'
 
 import CityImage from '../assets/city.jpg'
+import axios from 'axios'
 
 const Wrapper = styled.section`
     background-color: ${Colors.White};
@@ -53,6 +54,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     flex-grow: 2;
+    overflow: auto;
 `;
 
 const MorePublication = styled.a`
@@ -62,22 +64,93 @@ const MorePublication = styled.a`
     color: ${Colors.SecondaryText};
 `;
 
-export const Publications : React.FC = () => {
-    return (
-        <Wrapper>
-            <BrandImage>
-                <BrandTitle>Lorem ipsum dolor sit amet consectetur adipisicing elit.</BrandTitle>
-            </BrandImage>
-
-            <Content>
-                <Title>Latest publications</Title>
-                <Container>
-                    <PublicationItem />
-                    <PublicationItem />
-                    <PublicationItem />
-                </Container>
-                <MorePublication>See more publications</MorePublication>
-            </Content>
-        </Wrapper>
-    );
+interface Publication {
+    userId : number;
+    id : number;
+    title : string;
+    body : string;
 }
+
+interface PublicationState {
+    publications : Array<any>;
+}
+interface PublicationProps {
+}
+export class Publications extends React.Component<PublicationProps, PublicationState> {
+    constructor(props : PublicationProps) {
+        super(props);
+    }
+
+    state = {
+        publications: []
+    }
+
+    componentDidMount() {
+        axios.get('https://jsonplaceholder.typicode.com/posts')
+            .then(response => {
+                console.log(response.data);
+                this.setState({
+                    publications: response.data
+                });
+            })
+            .catch(error => console.log(error));
+        console.log(this.state);
+    }
+
+    render() {
+        return (
+            <Wrapper>
+                <BrandImage>
+                    <BrandTitle>Lorem ipsum dolor sit amet consectetur adipisicing elit.</BrandTitle>
+                </BrandImage>
+            
+                <Content>
+                    <Title>Latest publications</Title>
+                    <Container>
+                        {/* <PublicationItem />
+                        <PublicationItem />
+                        <PublicationItem /> */}
+                        {
+                            this.state.publications.map((item : Publication) => {
+                                <PublicationItem />
+                            })
+                        }
+                    </Container>
+                    <MorePublication>See more publications</MorePublication>
+                </Content>
+            </Wrapper>
+        );
+    }
+}
+
+// export const Publications : React.FC = () => { 
+//     const [publications, setPublications] = useState(0);
+
+//     useEffect(() => {
+//         axios.get('https://jsonplaceholder.typicode.com/posts')
+//             .then(response => {
+//                 setPublications(response.data);
+//             })
+//             .catch (error => {
+//                 console.log(error.data);
+//             });
+//     });
+
+//     return (
+//         <Wrapper>
+//             <BrandImage>
+//                 <BrandTitle>Lorem ipsum dolor sit amet consectetur adipisicing elit.</BrandTitle>
+//             </BrandImage>
+
+//             <Content>
+//                 <Title>Latest publications</Title>
+//                 <Container>
+//                     <PublicationItem />
+//                     <PublicationItem />
+//                     <PublicationItem />
+//                 </Container>
+//                 <MorePublication>See more publications</MorePublication>
+//             </Content>
+//         </Wrapper>
+//     );
+// }
