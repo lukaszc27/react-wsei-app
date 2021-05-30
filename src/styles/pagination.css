@@ -1,0 +1,13 @@
+ul.pagination {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+}
+
+ul.pagination li {
+    padding: 1em;
+    color: #0381be;
+    text-transform: uppercase;
+}
+
+.active { color: gray; }

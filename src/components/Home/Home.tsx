@@ -12,6 +12,7 @@ import Card from './Card'
 // import { render } from '@testing-library/react'
 import axios from 'axios'
 import ReactPaginate from 'react-paginate'
+import '../../styles/pagination.css';
 
 
 const ResumeTopBar = styled.div`
@@ -83,7 +84,8 @@ interface HomeComponentProps {
 
 interface HomeComponentState {
     comments : Array<CommentsInterface>,
-    filterPattern : string
+    filterPattern : string,
+    currentPage : number;
 }
 
 interface CommentsInterface {
@@ -101,7 +103,8 @@ export class Home extends React.Component<HomeComponentProps, HomeComponentState
 
     state = {
         comments: [],
-        filterPattern: ''
+        filterPattern: '',
+        currentPage: 1
     }
 
     componentDidMount() : void {
@@ -127,6 +130,12 @@ export class Home extends React.Component<HomeComponentProps, HomeComponentState
         }
     }
 
+    handlePageClick = (data : any) : any => {
+        this.setState({
+            currentPage: data.selected
+        });
+    }
+
     render() {
         return (
             <>
@@ -150,14 +159,34 @@ export class Home extends React.Component<HomeComponentProps, HomeComponentState
                 </ResumeTopBar>
 
                 <Container>
-                    {
+                    {/* {
                         this.state.comments.map((item : CommentsInterface) => (
 
                             item.name.toLocaleLowerCase().includes(this.state.filterPattern.toLocaleLowerCase()) &&
                             <Card title={item.name} content={item.body} />
                         ))
+                    } */}
+
+                    {
+                        this.state.comments.slice(this.state.currentPage, this.state.currentPage + 10)
+                            .map((item : CommentsInterface) => (
+                                item.name.toLocaleLowerCase().includes(this.state.filterPattern.toLowerCase()) &&
+                                <Card title={item.name} content={item.body} />
+                            ))
                     }
-                    {/* <ReactPaginate pageCount={500} pageRangeDisplayed={100} marginPagesDisplayed={10} /> */}
+
+                    <ReactPaginate
+                        previousLabel="Previous"
+                        nextLabel="Next"
+                        breakLabel="..."
+                        breakClassName="break-me"
+                        pageCount={this.state.comments.length}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={2}
+                        onPageChange={this.handlePageClick}
+                        containerClassName="pagination"
+                        activeClassName="active"
+                    />
                 </Container>
             </>
         );
