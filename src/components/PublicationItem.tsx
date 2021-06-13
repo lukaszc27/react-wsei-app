@@ -33,12 +33,12 @@ interface PublicationItemProps {
     body : string;
 }
 
-export const PublicationItem : React.FC = () => {
+export const PublicationItem : React.FC<PublicationItemProps> = (props) => {
     return (
         <Wrapper>
             <Image src={CityImage} alt="City" />
             <Content>
-                <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia voluptatum deleniti impedit, blanditiis corporis ad excepturi, </h3>
+                <h3>{props.title}</h3>
                 <InformationContainer>
                     06 sierpień 2020
                 </InformationContainer>

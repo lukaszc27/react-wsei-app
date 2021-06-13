@@ -64,7 +64,7 @@ const MorePublication = styled.a`
     color: ${Colors.SecondaryText};
 `;
 
-interface Publication {
+interface IPublication {
     userId : number;
     id : number;
     title : string;
@@ -72,7 +72,7 @@ interface Publication {
 }
 
 interface PublicationState {
-    publications : Array<any>;
+    publications : Array<IPublication>;
 }
 interface PublicationProps {
 }
@@ -88,16 +88,20 @@ export class Publications extends React.Component<PublicationProps, PublicationS
     componentDidMount() {
         axios.get('https://jsonplaceholder.typicode.com/posts')
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 this.setState({
                     publications: response.data
                 });
             })
-            .catch(error => console.log(error));
-        console.log(this.state);
+            .catch(error => {
+                console.log(error.data)
+            });
     }
 
     render() {
+        const pubSize : number = 3; // ilość publikacji na stronie głównej
+        const pubOffset : number = Math.floor(Math.random() * 90);
+
         return (
             <Wrapper>
                 <BrandImage>
@@ -107,13 +111,11 @@ export class Publications extends React.Component<PublicationProps, PublicationS
                 <Content>
                     <Title>Latest publications</Title>
                     <Container>
-                        {/* <PublicationItem />
-                        <PublicationItem />
-                        <PublicationItem /> */}
                         {
-                            this.state.publications.map((item : Publication) => {
-                                <PublicationItem />
-                            })
+                            this.state.publications.slice(pubOffset, pubOffset + pubSize)
+                                .map((item : IPublication) => (
+                                    <PublicationItem title={item.title} key={item.id} body="" />
+                            ))
                         }
                     </Container>
                     <MorePublication>See more publications</MorePublication>
