@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import HeaderButton from './HeaderButton'
 import ProfileView from './ProfileView'
+import PanelInformation from './PanelInformation/PanelInformation'
 import {Colors} from '../../helpers/Colors'
 
 
@@ -192,6 +193,8 @@ class Profile extends React.Component {
                         <Tag>Tunisia</Tag>
                     </Tags>
                 </Section>
+
+                <PanelInformation />
             </Wrapper>
         )
     }
