@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import React, {ChangeEvent, useState} from 'react'
 import EnityItem, {IEntity} from './EntityItem'
 import Filter from './Filter';
+import {Colors} from '../../helpers/Colors'
 
 import ConfigIcon from '../../assets/icons/settings.svg'
 import SearchIcon from '../../assets/icons/search.svg'
@@ -105,17 +106,11 @@ const Separator = styled.span`
     margin: 0px 3px;
 `;
 
-const FollowedButton = styled.span`
-    padding: .6em;
-    border: #00f solid 1px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+const FollowedButton = styled.select`
+    border: ${Colors.SecondaryText} solid 1px;
     border-radius: 3px;
-    /* color: #00f; */
-    font-size: .7em;
-
-    img { margin-left: .4em; }
+    color: ${Colors.SecondaryText};
+    padding: .4em;
 `;
 
 const Container = styled.section`
@@ -182,8 +177,8 @@ export const Entities : React.FC = () => {
 
                         <Separator />
                         <FollowedButton>
-                            Followed
-                            <img src={ArrowdownIcon} alt="Dropdown" />
+                            <option selected>Followed</option>
+                            <option>Unfollowed</option>
                         </FollowedButton>
                     </ToolBarSearch>
                 </ToolBarWrapper>
