@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import React, {ChangeEvent, useState} from 'react'
 import EnityItem, {IEntity} from './EntityItem'
+import Filter from './Filter';
 
 import ConfigIcon from '../../assets/icons/settings.svg'
 import SearchIcon from '../../assets/icons/search.svg'
@@ -126,9 +127,14 @@ const Container = styled.section`
 export const Entities : React.FC = () => {
     let entities : Array<IEntity> = [];
     const [pattern, setPattern] = useState<string>('');
+    const [filterVisible, setFilterVisible] = useState<boolean>(false);
 
-    const patternChangeHandle = (event : ChangeEvent<HTMLInputElement>) => {
+    const patternChangeHandle = (event : ChangeEvent<HTMLInputElement>): void => {
         setPattern(event.target.value);
+    }
+
+    const filterButtonHandle = (): void => {
+        setFilterVisible(!filterVisible);
     }
 
     for (let i = 0; i < 6*2; i++) {
@@ -163,7 +169,7 @@ export const Entities : React.FC = () => {
                         <ToolBarButton>...</ToolBarButton>
                         <Separator />
                         <ToolBarButton>Sort</ToolBarButton>
-                        <ToolBarButton>Filters</ToolBarButton>
+                        <ToolBarButton onClick={filterButtonHandle}>Filters</ToolBarButton>
                         <Separator />                       
                         <ToolBarButton>Share</ToolBarButton>
                     </ToolBarActions>
@@ -182,6 +188,8 @@ export const Entities : React.FC = () => {
                     </ToolBarSearch>
                 </ToolBarWrapper>
             </TopWrapper>
+
+            { filterVisible && <Filter /> }
 
             <Container>
                 {
