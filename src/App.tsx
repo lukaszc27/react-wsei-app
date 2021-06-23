@@ -22,6 +22,7 @@ import { EstateContract } from './components/Contracts/EstateContract';
 import {Corporate} from './components/Corporate/Corporate'
 import {GroupNorms} from './components/Groups/GroupNorms'
 import Profile from './components/Profile/Profile'
+import Ekosystem from './components/Ekosystem/Ekosystem'
 
 
 const Main = styled.div`
@@ -87,6 +88,9 @@ function App() {
 							</Route>
 							<Route path="/publications" exact>
 								<Publications />
+							</Route>
+							<Route path="/ekosystem" exact>
+								<Ekosystem />
 							</Route>
 							<Route path="/" exact>
 								<Home />

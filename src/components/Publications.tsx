@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import React, {useEffect, useState} from 'react'
+import {Link} from 'react-router-dom'
 import {Colors} from '../helpers/Colors'
 import {PublicationItem} from './PublicationItem'
 
@@ -57,11 +58,14 @@ const Container = styled.div`
     overflow: auto;
 `;
 
-const MorePublication = styled.a`
+const MorePublication = styled(Link)`
     justify-self: flex-end;
     margin-top: .6em;
     font-size: 1em;
     color: ${Colors.SecondaryText};
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
 `;
 
 interface IPublication {
@@ -77,9 +81,9 @@ interface PublicationState {
 interface PublicationProps {
 }
 export class Publications extends React.Component<PublicationProps, PublicationState> {
-    constructor(props : PublicationProps) {
-        super(props);
-    }
+    // constructor(props : PublicationProps) {
+    //     super(props);
+    // }
 
     state = {
         publications: []
@@ -118,7 +122,7 @@ export class Publications extends React.Component<PublicationProps, PublicationS
                             ))
                         }
                     </Container>
-                    <MorePublication>See more publications</MorePublication>
+                    <MorePublication to="/publications">See more publications</MorePublication>
                 </Content>
             </Wrapper>
         );

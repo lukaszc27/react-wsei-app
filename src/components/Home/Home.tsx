@@ -5,7 +5,7 @@ import {Workspace, Title} from '../Workspace'
 import {Colors} from '../../helpers/Colors'
 
 import FilterIcon from '../../assets/icons/search.png'
-import DropdownArrow from '../../assets/icons/arrow-down.svg'
+// import DropdownArrow from '../../assets/icons/arrow-down.svg'
 import Card from './Card'
 
 // import useDropdown from 'react-dropdown-hook'
