@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-
+import {Colors} from '../../helpers/Colors'
 import picture from '../../assets/city.jpg'
 
 const Wrapper = styled.div`
@@ -27,7 +27,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.h3`
-    color: #0000d6;
+    color: ${Colors.SecondaryText};
     justify-self: flex-start;
     flex-grow: 1;
     font-size: 16px;
