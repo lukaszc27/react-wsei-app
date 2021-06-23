@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Colors } from '../../helpers/Colors';
 
 import RowFilter from './RowFilter';
+import AddIcon from '../../assets/icons/plus.svg';
 
 const Wrapper = styled.section`
     width: 100%;
@@ -20,20 +21,28 @@ const FilterContainer = styled.div`
     flex-direction: column;
 `;
 
-const ButtonWrapper = styled.div``;
+const ButtonWrapper = styled.div`
+    display: flex;
+`;
 
 const Button = styled.button`
     border: none;
     background: transparent;
-    color: ${Colors.BadgeBackground};
+    color: ${Colors.SecondaryText};
     font-size: 1em;
+    display: flex;
+
+    span {
+        position: relative;
+        left: .3em;
+    }
 `;
 
 const Select = styled.select`
     border: none;
     background: transparent;
     font-size: 1em;
-    color: ${Colors.BadgeBackground};
+    color: ${Colors.SecondaryText};
     position: relative;
     left: 1em;
 `;
@@ -48,13 +57,19 @@ class Filter extends React.Component<{}, FilterState> {
 
     addFilterButtonHandle = (): void => {
         const selectType : HTMLSelectElement | null = document.querySelector('#queryType');
-        if (selectType !== null && selectType.value !== 'null') {
-            let tab : Array<any> = this.state.filters;
-            tab.push(<RowFilter type={selectType.value} />);
+        if (selectType !== null) {
+            if (selectType.value !== 'null') {
+                let tab : Array<any> = this.state.filters;
+                tab.push(<RowFilter type={selectType.value} />);
 
-            this.setState({
-                filters: tab
-            });
+                this.setState({
+                    filters: tab
+                });
+            }
+            else {
+                alert('Przed dodaniem filtru przeszukiwania, proszę wybrać typ filtru');
+                selectType.focus();
+            }
         }
     }
 
@@ -67,7 +82,10 @@ class Filter extends React.Component<{}, FilterState> {
                 </FilterContainer>
 
                 <ButtonWrapper>
-                    <Button onClick={this.addFilterButtonHandle}>Add filter</Button>
+                    <Button onClick={this.addFilterButtonHandle}>
+                        <img src={AddIcon} alt="Add filter" />
+                        <span>Add filter</span>
+                    </Button>
                     <Select id="queryType">
                         <option disabled selected value="null">choose property</option>
                         <option value="Where">Where</option>

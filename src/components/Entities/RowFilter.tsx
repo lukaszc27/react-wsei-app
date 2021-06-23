@@ -2,6 +2,7 @@ import React, { ChangeEventHandler, useState } from "react";
 import styled from "styled-components";
 
 import {Colors} from '../../helpers/Colors'
+import CloseIcon from '../../assets/icons/icons8-macos-close-32.png'
 
 const Wrapper = styled.tr`
   display: flex;
@@ -20,6 +21,11 @@ const CloseButton = styled.button`
     background: transparent;
     margin: 0;
     padding: .5em;
+
+    > img {
+        width: 25px;
+        height: 25px;
+    }
 `;
 
 const Select = styled.select`
@@ -56,7 +62,9 @@ const RowFilter: React.FC<RowFilterProps> = (props) => {
       {showFilter && (
         <Wrapper>
           <Column>
-            <CloseButton onClick={closeButtonHandle}>X</CloseButton>
+            <CloseButton onClick={closeButtonHandle}>
+                <img src={CloseIcon} alt="Close row" />
+            </CloseButton>
           </Column>
 
           <Column>{props.type}</Column>
@@ -81,7 +89,7 @@ const RowFilter: React.FC<RowFilterProps> = (props) => {
           </Column>
 
           {showDetails && (
-            <>
+            <React.Fragment>
               <Column>
                 <Select>
                   <option value="1">In</option>
@@ -92,7 +100,7 @@ const RowFilter: React.FC<RowFilterProps> = (props) => {
               <Column>
                 <InputField type="text" placeholder="Entity..." />
               </Column>
-            </>
+            </React.Fragment>
           )}
         </Wrapper>
       )}
