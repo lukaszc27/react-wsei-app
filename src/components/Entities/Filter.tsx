@@ -48,7 +48,7 @@ const Select = styled.select`
 `;
 
 interface FilterState {
-    filters: Array<any>
+    filters: Array<React.ReactElement>
 }
 class Filter extends React.Component<{}, FilterState> {
     state = {
@@ -59,7 +59,7 @@ class Filter extends React.Component<{}, FilterState> {
         const selectType : HTMLSelectElement | null = document.querySelector('#queryType');
         if (selectType !== null) {
             if (selectType.value !== 'null') {
-                let tab : Array<any> = this.state.filters;
+                let tab : Array<React.ReactElement> = this.state.filters;
                 tab.push(<RowFilter type={selectType.value} />);
 
                 this.setState({
