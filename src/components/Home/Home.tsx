@@ -55,16 +55,26 @@ const FilterButton = styled.button`
     border-bottom-right-radius: 3px;
 `;
 
-const FollowedButton = styled.div`
-    align-self: center;
-    color: ${Colors.BadgeBackground};
-    display: flex;
-    align-content: center;
-    justify-content: center;
+// const FollowedButton = styled.div`
+//     align-self: center;
+//     color: ${Colors.BadgeBackground};
+//     display: flex;
+//     align-content: center;
+//     justify-content: center;
+//     position: relative;
+//     left: 1em;
+
+//     > img { margin: 6px; }
+// `;
+
+const FollowedButton = styled.select`
+    border: none;
+    background: transparent;
+    font-size: 1em;
+    color: ${Colors.SecondaryText};
+    padding: .4em;
     position: relative;
     left: 1em;
-
-    > img { margin: 6px; }
 `;
 
 const RightContainer = styled.div`
@@ -151,9 +161,13 @@ export class Home extends React.Component<HomeComponentProps, HomeComponentState
                                 <img src={FilterIcon} alt="Filter" />
                             </FilterButton>
                         </FilterWrapper>
-                        <FollowedButton>
+                        {/* <FollowedButton>
                             <span>Followed</span>
                             <img src={DropdownArrow} alt="Dropdown" />
+                        </FollowedButton> */}
+                        <FollowedButton>
+                            <option>Followed</option>
+                            <option>Unfollowed</option>
                         </FollowedButton>
                     </RightContainer>
                 </ResumeTopBar>
